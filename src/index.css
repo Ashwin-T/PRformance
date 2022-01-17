@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+  color: white;
+  font-family: 'Fredericka the Great';
+  font-weight: normal;
+}
+
+.flexbox{
+  display: flex;
+}
+
+.column{
+  flex-direction: column;
+}
+
+.center{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
