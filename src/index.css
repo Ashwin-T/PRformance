@@ -9,6 +9,15 @@ body {
   font-weight: normal;
 }
 
+*{
+  overflow: hidden;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
 .flexbox{
   display: flex;
 }

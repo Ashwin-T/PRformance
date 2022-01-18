@@ -16,12 +16,12 @@ const Login = () => {
         <>
            <div className="flexbox column center loginContainer">
                 <div className="flexbox column center">
-                    <img src = './images/logo.png' className="logo"/>
+                    <img src = './images/logo.png' alt = 'main logo' className="logo"/>
                     <GoogleButton onClick = {signIn}/> 
                     <br />      
                 </div> 
                 <footer>
-                    <h4>&copy; 2022 - Ashwin N. Talwalkar</h4>
+                    <h5>&copy; 2022 - Ashwin N. Talwalkar</h5>
                 </footer>
             </div> 
         </>

@@ -8,7 +8,7 @@ import {app} from './tools/Firebase';
 const App = () =>{
 
   const auth = getAuth(app);
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   return (
     <div className="App">

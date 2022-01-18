@@ -1,0 +1,12 @@
+.notif{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1c1c1c;
+    color: #fff;
+    width: 35vh;
+    height: 15vh;
+    padding: 0.5vh 1vw;
+    box-sizing: content-box;
+}

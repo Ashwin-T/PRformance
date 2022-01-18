@@ -1,0 +1,7 @@
+.notifications{
+    overflow-y: scroll;
+    flex-direction: column;
+}
+.notifications h1{
+    margin-top: 25vh;
+}

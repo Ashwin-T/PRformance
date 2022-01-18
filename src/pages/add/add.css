@@ -1,0 +1,38 @@
+.add{
+    width: 100vw;
+    height: 75vh;
+}
+
+.add button{
+    width: 25vh;
+    height: 5vh;
+    border:#fff solid 1px;
+    border-radius: 16px;
+    background-color: #1c1c1c;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredericka the Great';
+    transition: all 0.2s ease-in-out;
+    padding: 35px 0 !important;
+    margin: 3vh 0;
+}
+.add input[type = 'text']{
+    width: 35vh;
+    height: 2vh;
+    border:#fff solid 1px;
+    border-radius: 16px;
+    background-color: #1c1c1c;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredericka the Great';
+    transition: all 0.2s ease-in-out;
+    padding: 35px 10px !important;
+}
