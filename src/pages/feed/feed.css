@@ -1,5 +1,6 @@
 .posts{
     overflow: scroll !important;
+    opacity: 1;
 }
 
 .posts::-webkit-scrollbar {

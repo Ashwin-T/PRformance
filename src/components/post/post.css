@@ -1,5 +1,7 @@
 .post{
     width: 414px;
+    overflow-x: hidden !important;
+    opacity: 1;
 }
 
 .post img{
@@ -7,7 +9,7 @@
 }
 
 .topbar{
-    width: 100%;
+    width: 414px;
     height: 60px;
     background-color: #1c1c1c
 }
@@ -38,8 +40,24 @@
 .red{
     color: #ff3242;
 }
-
-
+.modal{
+    width: 300px;
+    height: 50vh;
+    background-color: white !important;
+    border-radius: 25px;
+    position: fixed;
+    z-index: 100;
+    top: 25%;
+    border: 5px solid black;
+}
+.modalOpen{
+    opacity: 0.5;
+}
+.modal h3{
+    color: black;
+    margin: 25px 0;
+    border-bottom: black solid 3px;
+}
 
 .topbar img{
     width: 25px;
@@ -47,13 +65,12 @@
     clip-path: circle();
 }
 
-@media only screen and (max-width: 786) {
+@media only screen and (max-width: 786px) {
     .post{
         width: 100vw;
     }
-    
-    .post img{
-        width: 100%;
+    .topbar{
+        width: 100vw;
     }
 }
 

@@ -5,6 +5,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/s
 import {FaCamera, FaCheck} from 'react-icons/fa';
 import {TiArrowBack} from 'react-icons/ti';
 import './add.css';
+import Loading from "../../components/loading/loading";
 const Add = () => {
 
     const [option, setOption] = useState(0);
@@ -12,8 +13,11 @@ const Add = () => {
     const [imageAsFile, setImageAsFile] = useState('')
 
     const [caption, setCaption] = useState('Enter A Caption');
+    const [loading, setLoading] = useState(false);
 
     const handleFollow = async() => {
+        setLoading(true);
+
         const docRef = doc(getFirestore(), "allUsers", name);
         const docSnap = await getDoc(docRef);
 
@@ -29,18 +33,20 @@ const Add = () => {
                 follows: arrayUnion(followeeUid)
             })
 
-
             batch.commit();
             alert("You are now following " + name);
-            window.location.reload();
 
         }
         else {
             alert("That user does not exist, check your spelling maybe?");
         }
+
+        setLoading(false);
     }
     const handlePost = async() => {
 
+        setLoading(true);
+        
         const uid = getAuth().currentUser.uid;
         let text = "";
         const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -49,10 +55,7 @@ const Add = () => {
           text += possible.charAt(Math.floor(Math.random() * possible.length));
 
         const storage = getStorage();
-        // const url = text + ".png"
         const picStorageRef = ref(storage, imageAsFile.name); 
-
-        // const httpsReference = 'https://firebasestorage.googleapis.com/b/bucket/o/' + url
 
         await uploadBytesResumable(picStorageRef, imageAsFile);
 
@@ -101,9 +104,10 @@ const Add = () => {
         })
         .catch((error) => {
           // Handle any errors
+          setLoading(true);
         });
 
-    
+        setLoading(false);
        
     }
 
@@ -111,11 +115,11 @@ const Add = () => {
         const image = e.target.files[0]
         console.log(image);
         setImageAsFile(imageFile => (image))
-        
     }
 
     return ( 
         <>
+            {loading ? <Loading /> :
             <div className="add flexbox column center">
                 <div className="flexbox column center">
                     {option === 0 && 
@@ -152,7 +156,7 @@ const Add = () => {
                     option > 0 && <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>
                 }
             </div>
-
+            }   
         </>
      );
 }

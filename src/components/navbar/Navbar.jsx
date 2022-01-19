@@ -1,12 +1,28 @@
 import {Link} from 'react-router-dom';
 import './navbar.css';
-import {FaHome, FaBell, FaRegPlusSquare, FaExclamation, FaChartLine} from 'react-icons/fa';
+import {FaHome, FaBell, FaRegPlusSquare, FaExclamation} from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
+import { onSnapshot, doc, getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 const Navbar = () => {
+    
+    const [notif , setNotif] = useState([]);
 
     const Bell = () => {
 
-        if(localStorage.getItem('notifications').length > 2) { //LOL THIS IS A STRING SO I CANT USE LENGTH IG
+        useEffect(() => {
+            const docRef = doc(getFirestore(), "users", getAuth().currentUser.uid);
+            const snapshot = onSnapshot(docRef, (doc) => {
+                setNotif(doc.data().notifications);
+            });
+
+            return () => {
+                snapshot();
+            }
+        }, [])
+
+        if(notif.length > 0) { 
             return (
                 <span className="bell">
                     <FaBell size={25}/>
@@ -31,8 +47,7 @@ const Navbar = () => {
                     <Link to="/"><FaHome size = {25}/></Link>
                     <Link to='/notifications'><Bell /></Link>
                     <Link to = '/add'><FaRegPlusSquare size = {25}/></Link>
-                    <Link to = '/progress'><FaChartLine size = {25} /></Link>
-                    <Link to = '/profile'><img src = {localStorage.getItem('profPic')} alt = 'profile'/></Link>
+                    <Link to = '/profile'><img src = {getAuth().currentUser.photoURL} alt = 'profile'/></Link>
                 </div>
                 
             </nav>

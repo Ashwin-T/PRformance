@@ -4,7 +4,8 @@ import Source from './pages/Source';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 import {app} from './tools/Firebase';
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loading from './components/loading/loading';
 const App = () =>{
 
   const auth = getAuth(app);
@@ -13,7 +14,7 @@ const App = () =>{
   return (
     <div className="App">
         {
-          loading ? <div>Loading...</div> : user ? <Source />: <Login />
+          loading ? <Loading /> : user ? <Source />: <Login />
         }
     </div>
   );

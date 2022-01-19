@@ -4,12 +4,16 @@ import { useEffect, useState } from 'react';
 import { doc, getFirestore, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import {VscRefresh} from 'react-icons/vsc';
+import Loading from '../../components/loading/loading';
 
 const Feed = () => {
 
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+
+        setLoading(true);
 
         const getFeed = async () => {
             const docRef = doc(getFirestore(), "users", getAuth().currentUser.uid);
@@ -19,27 +23,31 @@ const Feed = () => {
                 const postRef = doc(getFirestore(), "posts", postz);
                 const postSnap = await getDoc(postRef);
                 if (postSnap.exists()) {
-                    setPosts(posts => [...posts, postSnap.data()]);
+                    setPosts(posts => [postSnap.data(), ...posts]);
                 }   
             }
 
             if (docSnap.exists()) {
                 const feedData = docSnap.data().feed;
-                console.log(feedData)
                 feedData.forEach(post => {
                     getPosts(post)
                 })
-            } else {
+            } 
+            else {
                 console.log("No such document!");
             }
         }
 
         getFeed();
-        
-              
+
+        setLoading(false);
+             
     }, [])
     return ( 
         <>
+            {
+            loading ? <Loading /> :
+            
             <div className="feed flexbox column center">
                 <div className="posts scrollbar-hidden flexbox column center">
                     <br/>
@@ -59,6 +67,7 @@ const Feed = () => {
                 </div> 
                 
             </div>
+            }
         </>
      );
 }

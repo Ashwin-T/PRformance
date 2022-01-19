@@ -1,0 +1,61 @@
+.user-profile{
+    width: 414px;
+}
+
+.user-profile h1{
+    margin: 0.5vh 0;
+}
+
+.name-photo img{
+    width: 75px;
+    clip-path: circle();
+    margin-right: 25px;
+}
+.bio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 414px;
+}
+.bio >*{
+    margin: 1vh 0;
+}
+.user-profile button{
+    transform: scale(1.5);
+    border: 0px;
+    background-color: white;
+}
+
+.allPosts{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.allPosts img{
+    width: calc(414px / 3);
+}
+
+.follow{
+    color: red;
+}
+
+.unfollow{
+    color: green;
+}
+
+@media only screen and (max-width: 786px) {
+    .user-profile{
+        width: 100vw;
+    }
+    .user-profile h1{
+        margin: 0.5vh 0;
+    }
+    .allPosts img{
+        width: calc(100vw / 3);
+    }
+    
+
+}
+

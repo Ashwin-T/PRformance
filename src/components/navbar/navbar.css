@@ -1,13 +1,15 @@
 nav{
     background-color: #1c1c1c !important;
-    width: calc(100% - 40px);
+    width: 100vw;
     height: 10vh;
     box-sizing: content-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    position: sticky; 
+    top: 0 !important;
+    z-index: 100;
 }
 
 nav img{
@@ -16,8 +18,12 @@ nav img{
     border-radius: 50%;
 }
 
+nav h1{
+    margin-left: 10px;
+}
+
 
 nav .icons > *{
-    padding: 0 5px;
+    padding: 0 10px;
 }
 

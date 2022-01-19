@@ -14,12 +14,12 @@
 
 .init button{
     width: 25vh;
-    height: 5vh;
+    height: 7vh;
     border:#fff solid 1px;
     border-radius: 16px;
     background-color: #1c1c1c;
     color: #fff;
-    font-size: 20px;
+    font-size: 17px;
     cursor: pointer;
     display: flex;
     justify-content: center;

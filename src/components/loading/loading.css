@@ -1,0 +1,8 @@
+.loading{
+    width: 100vw;
+    height: 85vh; 
+}
+
+.loading > *{
+    padding: 15px;
+}
