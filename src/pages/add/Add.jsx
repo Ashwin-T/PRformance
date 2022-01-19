@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { writeBatch, doc, getDoc, getFirestore, arrayUnion} from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
-import { getStorage, ref, uploadBytesResumable  } from "firebase/storage";
-
+import { getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
+import {FaCamera, FaCheck} from 'react-icons/fa';
+import {TiArrowBack} from 'react-icons/ti';
 import './add.css';
 const Add = () => {
 
     const [option, setOption] = useState(0);
     const [name, setName] = useState('Enter A Name');
-    const [postIMG, setPostIMG] = useState('');
+    const [imageAsFile, setImageAsFile] = useState('')
+
     const [caption, setCaption] = useState('Enter A Caption');
 
     const handleFollow = async() => {
@@ -38,50 +40,78 @@ const Add = () => {
         }
     }
     const handlePost = async() => {
+
         const uid = getAuth().currentUser.uid;
-
-        const storage = getStorage();
-        const url = "users/" + uid + "/" + caption.substring(0,3) + ".png"
-        const picRef = ref(storage, url); 
-
-        await uploadBytesResumable(picRef, postIMG);
-
-        const batch = writeBatch(getFirestore());
-
-        const docRef = doc(getFirestore(), "users", getAuth().currentUser.uid);
-        const docSnap = await getDoc(docRef);
-
         let text = "";
         const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       
-        for (var i = 0; i < 15; i++)
+        for (let i = 0; i < 15; i++)
           text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-        if (docSnap.exists()) {
-            const followers = docSnap.data().followers;
-            followers.forEach(follower => {
-                console.log(follower);
-                batch.update(doc(getFirestore(), "users", follower), {
-                    feed: arrayUnion(text)
+        const storage = getStorage();
+        // const url = text + ".png"
+        const picStorageRef = ref(storage, imageAsFile.name); 
+
+        // const httpsReference = 'https://firebasestorage.googleapis.com/b/bucket/o/' + url
+
+        await uploadBytesResumable(picStorageRef, imageAsFile);
+
+        getDownloadURL(ref(storage, imageAsFile.name))
+        .then((url) => {
+
+            const batchData = async(urlImage)=>{
+                const batch = writeBatch(getFirestore());
+
+                const docRef = doc(getFirestore(), "users", getAuth().currentUser.uid);
+                const docSnap = await getDoc(docRef);
+            
+                if (docSnap.exists()) {
+                    const followers = docSnap.data().followers;
+                    followers.forEach(follower => {
+                        console.log(follower);
+                        batch.update(doc(getFirestore(), "users", follower), {
+                            feed: arrayUnion(text)
+                        })
+                    })
+                }
+
+                batch.update(doc(getFirestore(), "users", uid), {
+                    posts: arrayUnion(text)
                 })
-            })
-        }
 
-        batch.update(doc(getFirestore(), "users", uid), {
-            posts: arrayUnion(text)
+
+                batch.set(doc(getFirestore(), "posts", text), {
+                    caption: caption,
+                    postIMG: urlImage,
+                    likes: [],
+                    comments: [],
+                    user: uid,
+                    name: getAuth().currentUser.displayName,
+                    profilePic: getAuth().currentUser.photoURL,
+                    id: text,
+                    timestamp: Date.now()
+                })
+
+                batch.commit();
+            }
+
+            batchData(url);
+            
+            alert("Your post has been posted!");
         })
+        .catch((error) => {
+          // Handle any errors
+        });
 
+    
+       
+    }
 
-        batch.set(doc(getFirestore(), "posts", text), {
-            caption: caption,
-            postIMG: url,
-            likes: 0,
-            comments: [],
-            user: uid
-        })
-
-        batch.commit();
-        alert("Your post has been posted!");
+    const handleImageAsFile = (e) => {
+        const image = e.target.files[0]
+        console.log(image);
+        setImageAsFile(imageFile => (image))
+        
     }
 
     return ( 
@@ -103,13 +133,24 @@ const Add = () => {
                     }{
                         option === 2 &&
                         <>
-                            <input type="file" value = {postIMG} onChange={(e)=>setPostIMG(e.target.value)}/>
-                            <h3>Caption</h3>
+                            <label>
+                                <input type="file" onChange={handleImageAsFile}/>
+                                {imageAsFile === '' && <h3>Add an Image</h3>}
+                                <div>
+                                    <FaCamera size = {75}/>
+                                </div>
+                                {imageAsFile  !== '' && <FaCheck style = {{color: 'green'}} size = {25}/>}
+                            </label>
+                            <br />
                             <input type="text" value = {caption} onChange={(e)=>setCaption(e.target.value)}/>
                             <button onClick={handlePost}>Post</button>
                         </>
                     }
                 </div>
+
+                {
+                    option > 0 && <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>
+                }
             </div>
 
         </>

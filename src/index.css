@@ -9,8 +9,8 @@ body {
   font-weight: normal;
 }
 
-*{
-  overflow: hidden;
+body{
+  overflow-x: hidden;
 }
 
 a{

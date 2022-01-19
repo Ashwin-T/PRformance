@@ -1,0 +1,12 @@
+.posts{
+    overflow: scroll !important;
+}
+
+.posts::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.posts h1{
+    margin-top: 25vh;
+}

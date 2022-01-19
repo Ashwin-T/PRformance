@@ -14,7 +14,7 @@ import Feed from './feed/Feed';
 
 const Source = () => {
 
-    const [init, setInit] = React.useState('notReady');
+    const [init, setInit] = React.useState(false);
 
     
     useEffect(() => {
@@ -85,7 +85,8 @@ const Source = () => {
                         <Route exact path="/init" element={<Init />}/>
                     </Routes>   
                 </Suspense> :  <Init />
-            }{
+            }
+            {
                 init === 'notReady' && <div>Loading...</div>
             }
         </>

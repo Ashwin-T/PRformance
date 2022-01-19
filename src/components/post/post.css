@@ -1,0 +1,59 @@
+.post{
+    width: 414px;
+}
+
+.post img{
+    width: 414px;
+}
+
+.topbar{
+    width: 100%;
+    height: 60px;
+    background-color: #1c1c1c
+}
+.dots{
+    margin-right: 25px;
+}
+.left > *{
+    margin: 0 10px;
+}
+.buttombar{
+    height: 150px;
+    width: 100%;
+    background-color: #1c1c1c;
+}
+.buttombar > *{
+    margin: 0 10px;
+}
+
+.buttombar .caption > *{
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.heart{
+    margin-right: 10px;
+}
+
+.red{
+    color: #ff3242;
+}
+
+
+
+.topbar img{
+    width: 25px;
+    height: 25px;
+    clip-path: circle();
+}
+
+@media only screen and (max-width: 786) {
+    .post{
+        width: 100vw;
+    }
+    
+    .post img{
+        width: 100%;
+    }
+}
+
