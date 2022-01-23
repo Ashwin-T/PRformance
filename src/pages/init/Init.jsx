@@ -6,8 +6,10 @@ import Loading from '../../components/loading/loading';
 import { TiArrowBack } from 'react-icons/ti';
 import {BsTrash} from 'react-icons/bs';
 import { getStorage, ref, deleteObject } from "firebase/storage";
-
+import { useNavigate } from 'react-router-dom';
 const Init = () => {
+
+    let navigate = useNavigate();
 
     const [option, setOption] = useState(0);
     const [page, setPage] = useState(1);
@@ -106,8 +108,9 @@ const Init = () => {
         localStorage.setItem('profPic', getAuth().currentUser.photoURL);
         
         await batch.commit().then(()=>{
+            window.location.reload();
+            navigate('/');
             setVirgin(false);
-            window.location.reload()
         });
         
         setLoading(false);
@@ -153,10 +156,12 @@ const Init = () => {
     const Modal = () => {
         return (
             <div className="modal flexbox column center">
-                <h3>Are You Sure You Want To Delete This!</h3>
-                <div className="flexbox center">
-                    <BsTrash onClick={handleDelete} size = {50} style={{color: 'red'}}/>
-                    <TiArrowBack size = {50} style = {{color: 'black'}} onClick={()=> setOpen(false)}/>
+                <div className="modal-content flexbox column center">
+                    <h3>Are You Sure You Want To Delete This!</h3>
+                    <div className="flexbox center">
+                        <BsTrash onClick={handleDelete} size = {50} style={{color: 'red'}}/>
+                        <TiArrowBack size = {50} style = {{color: 'black'}} onClick={()=> setOpen(false)}/>
+                    </div>
                 </div>
             </div>
         )
@@ -195,7 +200,7 @@ const Init = () => {
                             <br/>
                             <button onClick = {()=>setPage(2)}>Next</button>    
                             <br/> 
-                            <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>        
+                            {!virgin && <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>}    
                         </> : 
                         <>
                         <h1>You Are Ready to Go!</h1>
@@ -216,7 +221,12 @@ const Init = () => {
                                         )
                                     })}
                                 </div>
-                            </>  : <h1>You Have No Posts!</h1>}
+                            </>  : 
+                                <div className="flexbox column center">
+                                    <h1>You Have No Posts!</h1>
+                                    <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>
+                                </div>  
+                            }
                             
                         </> : null
                     }

@@ -11,6 +11,9 @@
     flex-direction: column;
     width: 100vw;
 }
+.modal-content{
+    width: 75%;
+}
 
 .init button{
     width: 25vh;
