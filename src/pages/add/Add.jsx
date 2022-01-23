@@ -27,7 +27,7 @@ const Add = () => {
             const batch = writeBatch(getFirestore());
             batch.update(doc(getFirestore(), "users", followeeUid), {
                 followers: arrayUnion(followerUid),
-                notifications: arrayUnion(name + " has started following you")
+                notifications: arrayUnion(getAuth().currentUser.displayName + " has started following you")
             })
             batch.update(doc(getFirestore(), "users", followerUid), {
                 follows: arrayUnion(followeeUid)
