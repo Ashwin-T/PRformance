@@ -9,7 +9,7 @@ import Loading from "../../components/loading/loading";
 const Add = () => {
 
     const [option, setOption] = useState(0);
-    const [name, setName] = useState('Enter A Name');
+    const [name, setName] = useState('');
     const [imageAsFile, setImageAsFile] = useState('')
 
     const [caption, setCaption] = useState('Enter A Caption');
@@ -131,7 +131,7 @@ const Add = () => {
                         option === 1 &&
                         <>
                             <h1>Search By Full Name</h1>
-                            <input type="text" value = {name} onChange={(e)=>setName(e.target.value)}/>
+                            <input type="text" placeholder = 'Ashwin Talwalkar' value = {name} onChange={(e)=>setName(e.target.value)}/>
                             <button onClick={handleFollow}>Search</button>
                         </>
                     }{
