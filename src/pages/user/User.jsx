@@ -4,6 +4,7 @@ import { doc, getDoc, getFirestore , writeBatch, arrayRemove, arrayUnion} from "
 import { getAuth } from "firebase/auth";
 import Loading from '../../components/loading/loading';
 import {AiOutlineUser} from 'react-icons/ai';
+import {FaSpotify} from 'react-icons/fa';
 import './user.css';
 
 const User = () => {
@@ -26,14 +27,12 @@ const User = () => {
                 setFollows(docSnap.data().followers.includes(getAuth().currentUser.uid));
             }
             else{
-                console.log("User does not exist");
             }
 
             const getPosts = async(postz) => {
                 await getDoc(doc(getFirestore(), "posts", postz)).then(docSnap => {
                     setPosts(posts => [docSnap.data(), ...posts]);
                 })
-                setLoading(false);
             }
 
             if(follows){
@@ -84,6 +83,7 @@ const User = () => {
     }
     return ( 
         <>
+            <div className="flexbox column center">
             {loading  && user !== null ? <Loading /> : 
                 <div className="user-profile flexbox column center">
                     <br/>
@@ -96,6 +96,7 @@ const User = () => {
                         <h3>{user.bio}</h3>
                         <h5>Short Term Goal: {user.shortTerm}</h5>
                         <h5>Long Term Goal: {user.longTerm}</h5>
+                        <FaSpotify onClick={()=>window.open(user.playList, '_blank')} style = {{color: '#1DB954'}} size = {40}/>
                     </div>
                     <br/>
                         <button className={followStyle} onClick = {followOrUnfollow}><AiOutlineUser /> {follows ? `Unfollow` : `Follow`}</button>
@@ -111,6 +112,7 @@ const User = () => {
                     </div>
                 </div>
             }
+            </div>
 
         </> 
     );

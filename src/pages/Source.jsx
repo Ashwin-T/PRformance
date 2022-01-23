@@ -4,6 +4,7 @@ import { useEffect, Suspense } from 'react';
 
 import { doc, getDoc, getFirestore} from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
+import { TiArrowBack } from "react-icons/ti";
 
 import Navbar from '../components/navbar/Navbar';
 import Loading from '../components/loading/loading';
@@ -13,16 +14,17 @@ import Notifications from './notifications/Notifications';
 import Add from './add/Add';
 import Feed from './feed/Feed';
 import User from './user/User';
+import PostPage from './postPage/PostPage';
+import { useNavigate } from 'react-router-dom';
 
 const Source = () => {
 
     const [init, setInit] = React.useState(false);
-
-    
+    let navigate = useNavigate();
     useEffect(() => {
 
         const db = getFirestore();
-
+        
         const getData = async () => {
             const docRef = doc(db, "users", getAuth().currentUser.uid);
             const docSnap = await getDoc(docRef);
@@ -37,11 +39,9 @@ const Source = () => {
                 localStorage.setItem('posts', JSON.stringify(docSnap.data().posts));
                 localStorage.setItem('notifications', JSON.stringify(docSnap.data().notifications));
                 localStorage.setItem('profPic', getAuth().currentUser.photoURL);
-                localStorage.setItem('uid', getAuth().currentUser.uid);
                 setInit(false);
             } else {
             // doc.data() will be undefined in this case
-                console.log("No such document!");
                 setInit(true);
             }
         }  
@@ -49,6 +49,16 @@ const Source = () => {
         getData();  
 
     }, [])
+
+    const BackArrow = () => {
+        return(
+            <>  
+                <div style = {{width: '100vw', cursor: 'pointer', position: 'fixed', zIndex: '100', backgroundColor: 'black'}} className="flexbox">
+                    <TiArrowBack size = {50} onClick = {()=>navigate('/')}/><h3>Go Back</h3>   
+                </div>
+            </>
+        )
+    }
 
     return ( 
         <>
@@ -64,6 +74,9 @@ const Source = () => {
                         <Route exact path="profile" element={<><Navbar /><Init /></>}/>
                         <Route exact path="user" >
                             <Route path=":id" element={<><Navbar /><User /></>}/>
+                        </Route>
+                        <Route exact path="post" >
+                            <Route path=":id" element={<><BackArrow /><PostPage/></>}/>
                         </Route>
                         <Route exact path="/init" element={<Init />}/>
                     </Routes>   

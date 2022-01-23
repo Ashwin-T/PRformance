@@ -5,7 +5,7 @@
 
 .posts::-webkit-scrollbar {
     width: 0px;
-    background: transparent;
+    background: none;
 }
 
 .posts h1{

@@ -9,35 +9,17 @@ const Navbar = () => {
     
     const [notif , setNotif] = useState([]);
 
-    const Bell = () => {
+    useEffect(() => {
+        const docRef = doc(getFirestore(), "users", getAuth().currentUser.uid);
+        const snapshot = onSnapshot(docRef, (doc) => {
+            setNotif(doc.data().notifications);
+        });
 
-        useEffect(() => {
-            const docRef = doc(getFirestore(), "users", getAuth().currentUser.uid);
-            const snapshot = onSnapshot(docRef, (doc) => {
-                setNotif(doc.data().notifications);
-            });
-
-            return () => {
-                snapshot();
-            }
-        }, [])
-
-        if(notif.length > 0) { 
-            return (
-                <span className="bell">
-                    <FaBell size={25}/>
-                    <FaExclamation style = {{color: 'red'}} />
-                </span>
-            );
+        return () => {
+            snapshot();
         }
-        else{
-            return (
-                <span className="bell">
-                    <FaBell size={25}/>
-                </span>
-            );
-        }
-    }
+    }, [])
+
 
     return ( 
         <>
@@ -45,7 +27,7 @@ const Navbar = () => {
                 <h1>PRformance</h1>
                 <div className='icons'>
                     <Link to="/"><FaHome size = {25}/></Link>
-                    <Link to='/notifications'><Bell /></Link>
+                    <Link to='/notifications'><span><FaBell size={25}/>{notif.length > 0 && <FaExclamation style = {{color: 'red'}} />}</span></Link>
                     <Link to = '/add'><FaRegPlusSquare size = {25}/></Link>
                     <Link to = '/profile'><img src = {getAuth().currentUser.photoURL} alt = 'profile'/></Link>
                 </div>

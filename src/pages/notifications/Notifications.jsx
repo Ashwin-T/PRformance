@@ -9,12 +9,14 @@ const Notifications = () => {
 
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [uid, setUid] = useState('');
     useEffect(() => {
         setLoading(true);
 
         const docRef = doc(getFirestore(), "users", getAuth().currentUser.uid);
         const snapshot = onSnapshot(docRef, (doc) => {
             setNotifications(doc.data().notifications);
+            setUid(doc.data().uid);
         });
 
         setLoading(false);
@@ -31,10 +33,7 @@ const Notifications = () => {
     
         const handleDelete = async() => {
             setLoading(true);
-
-            const ref = doc(getFirestore(), "users", localStorage.getItem('uid'));
-        
-            await updateDoc(ref, {
+            await updateDoc(doc(getFirestore(), "users", uid), {
                 notifications: arrayRemove(`${notification}`)
             })
             
@@ -48,7 +47,7 @@ const Notifications = () => {
                     <br/>
                     <div className="notif">
                         <h3>{notification}</h3>
-                        <FaCheck onClick = {handleDelete} style = {{color: 'green'}} size={15}/>
+                        <FaCheck onClick = {handleDelete} style = {{color: 'green', cursor: 'pointer'}} size={15}/>
                     </div>
                     <br/>
                 </>

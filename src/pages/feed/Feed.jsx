@@ -34,15 +34,20 @@ const Feed = () => {
                 })
             } 
             else {
-                console.log("No such document!");
             }
         }
 
         getFeed();
-
         setLoading(false);
+
+        return () => {
+            getFeed();
+        }
+
              
     }, [])
+    
+    
     return ( 
         <>
             {

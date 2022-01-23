@@ -25,5 +25,20 @@ nav h1{
 
 nav .icons > *{
     padding: 0 10px;
+    cursor: pointer;
+}
+
+nav .icons > :last-child{
+    margin-right: 25px
+}
+
+@media only screen and (max-width: 786) {
+    nav .icons > *{
+        padding: 0 10px;
+    }
+    nav .icons > :last-child{
+        margin-right: 10px
+    }
+    
 }
 

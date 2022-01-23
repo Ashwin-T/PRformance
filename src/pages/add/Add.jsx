@@ -34,6 +34,7 @@ const Add = () => {
             })
 
             batch.commit();
+            setName('Enter A Name')
             alert("You are now following " + name);
 
         }
@@ -71,7 +72,6 @@ const Add = () => {
                 if (docSnap.exists()) {
                     const followers = docSnap.data().followers;
                     followers.forEach(follower => {
-                        console.log(follower);
                         batch.update(doc(getFirestore(), "users", follower), {
                             feed: arrayUnion(text)
                         })
@@ -92,6 +92,7 @@ const Add = () => {
                     name: getAuth().currentUser.displayName,
                     profilePic: getAuth().currentUser.photoURL,
                     id: text,
+                    imgName: imageAsFile.name,
                     timestamp: Date.now()
                 })
 
@@ -99,7 +100,8 @@ const Add = () => {
             }
 
             batchData(url);
-            
+            setCaption('Enter A Caption');
+            setImageAsFile('');
             alert("Your post has been posted!");
         })
         .catch((error) => {
@@ -113,7 +115,6 @@ const Add = () => {
 
     const handleImageAsFile = (e) => {
         const image = e.target.files[0]
-        console.log(image);
         setImageAsFile(imageFile => (image))
     }
 
@@ -121,7 +122,6 @@ const Add = () => {
         <>
             {loading ? <Loading /> :
             <div className="add flexbox column center">
-                <div className="flexbox column center">
                     {option === 0 && 
                         <>
                             <button onClick = {()=>setOption(1)}>Follow New People</button>
@@ -150,7 +150,6 @@ const Add = () => {
                             <button onClick={handlePost}>Post</button>
                         </>
                     }
-                </div>
 
                 {
                     option > 0 && <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>
