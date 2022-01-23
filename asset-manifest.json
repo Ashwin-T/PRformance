@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/prformance.net/static/css/main.96a92507.css",
-    "main.js": "/prformance.net/static/js/main.040361a2.js",
-    "service-worker.js": "/prformance.net/service-worker.js",
-    "index.html": "/prformance.net/index.html",
-    "main.96a92507.css.map": "/prformance.net/static/css/main.96a92507.css.map",
-    "main.040361a2.js.map": "/prformance.net/static/js/main.040361a2.js.map"
+    "main.css": "/static/css/main.96a92507.css",
+    "main.js": "/static/js/main.040361a2.js",
+    "service-worker.js": "/service-worker.js",
+    "index.html": "/index.html",
+    "main.96a92507.css.map": "/static/css/main.96a92507.css.map",
+    "main.040361a2.js.map": "/static/js/main.040361a2.js.map"
   },
   "entrypoints": [
     "static/css/main.96a92507.css",
