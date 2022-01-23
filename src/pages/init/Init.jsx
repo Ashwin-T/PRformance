@@ -4,7 +4,6 @@ import { arrayRemove, doc, getDoc, getFirestore, writeBatch} from "firebase/fire
 import { getAuth } from 'firebase/auth';
 import Loading from '../../components/loading/loading';
 import { TiArrowBack } from 'react-icons/ti';
-import {BsTrash} from 'react-icons/bs';
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { useNavigate } from 'react-router-dom';
 const Init = () => {
@@ -109,7 +108,6 @@ const Init = () => {
         
         await batch.commit().then(()=>{
             window.location.reload();
-            navigate('/');
             setVirgin(false);
         });
         
@@ -157,11 +155,15 @@ const Init = () => {
         return (
             <div className="modal flexbox column center">
                 <div className="modal-content flexbox column center">
-                    <h3>Are You Sure You Want To Delete This!</h3>
-                    <div className="flexbox center">
-                        <BsTrash onClick={handleDelete} size = {50} style={{color: 'red'}}/>
-                        <TiArrowBack size = {50} style = {{color: 'black'}} onClick={()=> setOpen(false)}/>
+                    <div className="flexbox center pointer" onClick={()=>navigate(`/post/${currentPost.id}`)}>
+                        <h3>View Comments</h3>
                     </div>
+                    <div className="flexbox center pointer" onClick={handleDelete}>
+                        <h3>Delete Post</h3>
+                    </div>
+                   
+                    <TiArrowBack size = {50} style = {{color: 'black'}} onClick={()=> setOpen(false)}/>
+
                 </div>
             </div>
         )
@@ -176,7 +178,7 @@ const Init = () => {
                             <>
                                 <button onClick = {()=>setOption(1)}>Edit Profile</button>
                                 <br />
-                                <button onClick = {()=>setOption(2)}>Delete Posts</button>
+                                <button onClick = {()=>setOption(2)}>View Posts</button>
                             </>
                         : option === 1 ?
                         page === 0 ? 
@@ -211,11 +213,11 @@ const Init = () => {
                             {posts.length > 0 ?
                             <>
                                 {open && <Modal />}
-                                <h1>Delete Posts</h1>
+                                <h1>View Posts</h1>
                                 <div className="allPosts">
                                     {posts.map((post, index) => {
                                         return (
-                                            <div onClick = {()=> {setOpen(true); setCurrentPost(post)}} key = {index} className="posts flexbox column center">
+                                            <div onClick = {()=> {setOpen(true); setCurrentPost(post)}} key = {index} className="posts flexbox column center pointer">
                                                 <img src={post.postIMG} alt="post" />
                                             </div>
                                         )
@@ -224,9 +226,10 @@ const Init = () => {
                             </>  : 
                                 <div className="flexbox column center">
                                     <h1>You Have No Posts!</h1>
-                                    <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>
                                 </div>  
                             }
+                            <TiArrowBack size = {50} onClick = {()=>setOption(0)}/>
+
                             
                         </> : null
                     }

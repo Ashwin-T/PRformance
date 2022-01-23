@@ -52,7 +52,7 @@ const Post = ({post}) => {
         return (
             <div className="modal flexbox column center">
                     <h3 onClick={()=>navigate(`/user/${post.user}`)} style = {{cursor: 'pointer'}}>View User Profile</h3>
-                    <h3 onClick = {()=> navigate(`/post/${post.id}`)} style = {{cursor: 'pointer'}}>View and Add Comment</h3>
+                    <h3 onClick = {()=> navigate(`/post/${post.id}`)} style = {{cursor: 'pointer'}}>View and Add Comments</h3>
                     <TiArrowBack size = {50} style = {{color: 'black'}} onClick={handleCloseModal}/>
             </div>
         )
