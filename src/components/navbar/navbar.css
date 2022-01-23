@@ -32,7 +32,7 @@ nav .icons > :last-child{
     margin-right: 25px
 }
 
-@media only screen and (max-width: 786) {
+@media only screen and (max-width: 786px) {
     nav .icons > *{
         padding: 0 10px;
     }

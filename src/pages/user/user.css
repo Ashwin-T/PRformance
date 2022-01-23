@@ -35,6 +35,9 @@
 }
 .allPosts img{
     width: calc(40vw / 3);
+    height: calc(40vw / 3);
+    background-color: black;
+    overflow: hidden;
 }
 
 .follow{

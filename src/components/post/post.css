@@ -5,7 +5,9 @@
 }
 
 .post img{
+    object-fit: cover;
     width: 414px;
+    height: 70vh;
 }
 
 .topbar{
