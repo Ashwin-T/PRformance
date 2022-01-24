@@ -25,9 +25,10 @@ const Add = () => {
             const followeeUid = docSnap.data().uid;
             const followerUid = getAuth().currentUser.uid;
             const batch = writeBatch(getFirestore());
+            
             batch.update(doc(getFirestore(), "users", followeeUid), {
                 followers: arrayUnion(followerUid),
-                notifications: arrayUnion(getAuth().currentUser.displayName + " has started following you")
+                notifications: arrayUnion(getAuth().currentUser.displayName + " has started following you;" + followerUid)
             })
             batch.update(doc(getFirestore(), "users", followerUid), {
                 follows: arrayUnion(followeeUid)

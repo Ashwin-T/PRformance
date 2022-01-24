@@ -64,7 +64,7 @@ const Feed = () => {
                         })
                     }
                     {
-                        posts.length === 0 && <h1>No Posts Yet</h1>
+                        posts.length === 0 && <div className="flexbox column center"><h1>No Posts Yet</h1><h3>Click the + icon to follow others</h3></div>
                     }
                     <footer className="flexbox">
                         <VscRefresh size = {25} onClick = {()=>window.location.reload()}/>

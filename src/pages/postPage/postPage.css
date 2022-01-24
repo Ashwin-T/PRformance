@@ -14,6 +14,9 @@
 .comment > *{
     margin: 0px;    
 }
+.comment h3{
+    width: 600px;
+}
 .comment img{
     width: 25px;
     height: 25px;
@@ -55,9 +58,12 @@
     transition: 0.3s;
 }
 
-@media screen and (max-width: 786) {
+@media screen and (max-width: 786px) {
     .comments{
         width: 100vw;
+    }
+    .comment h3{
+        width: 90vw;
     }
 }
     

@@ -59,7 +59,7 @@ const User = () => {
 
         if(follows){
             batch.update(followerDoc, {
-                following: arrayRemove(getAuth().currentUser.uid)
+                follows: arrayRemove(getAuth().currentUser.uid)
             })
             batch.update(followeeDoc, {
                 followers: arrayRemove(getAuth().currentUser.uid),
@@ -70,7 +70,7 @@ const User = () => {
         }
         else{
             batch.update(followerDoc, {
-                following: arrayUnion(getAuth().currentUser.uid)
+                follows: arrayUnion(getAuth().currentUser.uid)
             })
             batch.update(followeeDoc, {
                 followers: arrayUnion(getAuth().currentUser.uid),

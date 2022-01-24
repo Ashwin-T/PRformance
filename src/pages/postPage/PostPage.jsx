@@ -1,6 +1,6 @@
 import { useParams, useNavigate} from "react-router-dom";
 import { useEffect, useState } from "react";
-import {doc, getDoc, getFirestore, arrayUnion, updateDoc } from "firebase/firestore";
+import {doc, getDoc, getFirestore, arrayUnion, writeBatch } from "firebase/firestore";
 import Loading from "../../components/loading/loading";
 import { getAuth } from "firebase/auth";
 import './postPage.css';
@@ -38,10 +38,18 @@ const PostPage = () => {
     }, [id, navigate])
 
     const addComment = async() => {
-        const user = getAuth().currentUser
+        const user = getAuth().currentUser;
+        const batch = writeBatch(getFirestore());
+        
         if(newComment !== ''){
             const pushComment =user.photoURL + ';' + user.displayName + ';' + newComment;
-            await updateDoc(doc(getFirestore(), "posts", id), {comments: arrayUnion(pushComment)}).then(()=>{
+            batch.update(doc(getFirestore(), "users", post.user), {
+                notifications: arrayUnion(`${user.displayName} commented on your post;${post.id}`)
+            })
+
+            batch.update(doc(getFirestore(), "posts", id), {comments: arrayUnion(pushComment)})
+
+            await batch.commit().then(()=>{
                 setPost({...post, comments: [...post.comments, pushComment]})
                 setNewComment('');
             });
