@@ -19,25 +19,25 @@ nav img{
 }
 
 nav h1{
-    margin-left: 5px;
+    margin-left: 7px;
 }
 
 
 nav .icons > *{
-    padding: 0 5px;
+    padding: 0 7px;
     cursor: pointer;
 }
 
 nav .icons > :last-child{
-    margin-right: 15px
+    margin-right: 14px
 }
 
 @media only screen and (max-width: 786px) {
     nav .icons > *{
-        padding: 0 5px;
+        padding: 0 7px;
     }
     nav .icons > :last-child{
-        margin-right: 5px
+        margin-right: 7px
     }
     
 }
