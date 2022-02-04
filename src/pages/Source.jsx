@@ -15,6 +15,7 @@ import Add from './add/Add';
 import Feed from './feed/Feed';
 import User from './user/User';
 import PostPage from './postPage/PostPage';
+import Search from './search/Search';
 import { useNavigate } from 'react-router-dom';
 
 const Source = () => {
@@ -68,6 +69,7 @@ const Source = () => {
                 <Suspense>
                     <Routes>
                         <Route exact path="/" element={<><Navbar /><Feed /></>}/>
+                        <Route exact path = 'search' element = {<><Navbar /><Search /></>}/>
                         <Route exact path="notifications" element={<><Navbar /><Notifications /></>}/>
                         <Route exact path="add" element={<><Navbar /><Add /></>}/>
                         <Route exact path="progress" element={<><Navbar /></>}/>

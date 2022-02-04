@@ -3,11 +3,10 @@
     opacity: 1;
 }
 
-.posts::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 0px;
     background: none;
 }
-
 .posts h1{
     margin-top: 25vh;
 }

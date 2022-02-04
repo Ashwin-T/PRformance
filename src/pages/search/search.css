@@ -1,9 +1,9 @@
-.add{
+.search{
     width: 100vw;
     height: 75vh;
 }
 
-.add button{
+.search button{
     width: 25vh;
     height: 5vh;
     border:#fff solid 1px;
@@ -20,7 +20,7 @@
     padding: 35px 0 !important;
     margin: 3vh 0;
 }
-.add input[type = 'text']{
+.search input[type = 'text']{
     width: 75vh;
     height: 3vh;
     border:#fff solid 1px;
@@ -37,14 +37,8 @@
     padding: 35px 10px !important;
 }
 
-.add input[type = 'file']{
-    display: none;
-}
-
-
 @media only screen and (max-width: 786px) {
-    .add input[type = 'text']{
+    .search input[type = 'text']{
         width: 35vh;
     }
 }
-

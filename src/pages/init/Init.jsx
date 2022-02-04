@@ -13,8 +13,8 @@ const Init = () => {
     const [option, setOption] = useState(0);
     const [page, setPage] = useState(1);
     const [virgin, setVirgin] = useState(true);
-    const [shortTerm, setShortTerm] = useState('Drink Water');
-    const [longTerm, setLongTerm] = useState('Weight Loss');
+    const [shortTerm, setShortTerm] = useState('Just Chilling');
+    const [longTerm, setLongTerm] = useState('Just Chilling');
     const [bio, setBio] = useState('I am a new user');
     const [playList, setPlaylist] = useState('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
     const [loading, setLoading] = useState(true);
@@ -51,10 +51,10 @@ const Init = () => {
                 setOption(1)
                 setPage(0);
             }
+            setLoading(false);
         }
 
         checkFirestore();
-        setLoading(false);
     }, [])
 
     const submit = async () => {
@@ -191,14 +191,14 @@ const Init = () => {
                         : page === 1 ? 
                         <>
                             <h3>What Long Term Goals Do You Have?</h3>
-                            <input required type="text" value = {longTerm} onChange={(e)=>setLongTerm(e.target.value)} />
+                            <input required type="text" placeholder = 'Build Muscle' onChange={(e)=>setLongTerm(e.target.value)} />
                             <h3>What Short Term Goals Do You Have?</h3>
-                            <input type="text" value = {shortTerm} onChange = {(e) => setShortTerm(e.target.value)} />
+                            <input type="text" placeholder = 'Become Confident' onChange = {(e) => setShortTerm(e.target.value)} />
 
                             <h3>Tell Us a Little About Yourself</h3>  
-                            <input required type="text" value = {bio} onChange = {(e)=> setBio(e.target.value)}/>
+                            <input required type="text" placeholder='I am a new user' onChange = {(e)=> setBio(e.target.value)}/>
                             <h3>Go To Workout Playlist?</h3>
-                            <input required type="text" value = {playList} onChange = {(e)=> setPlaylist(e.target.value)} />
+                            <input required type="text" placeholder='https://www.youtube.com/watch?v=dQw4w9WgXcQ' onChange = {(e)=> setPlaylist(e.target.value)} />
                             <br/>
                             <button onClick = {()=>setPage(2)}>Next</button>    
                             <br/> 

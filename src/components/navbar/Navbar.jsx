@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import './navbar.css';
-import {FaHome, FaBell, FaRegPlusSquare, FaExclamation} from 'react-icons/fa';
+import {FaHome, FaBell, FaRegPlusSquare, FaExclamation, FaSearch} from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
 import { onSnapshot, doc, getFirestore } from 'firebase/firestore';
@@ -27,6 +27,7 @@ const Navbar = () => {
                 <h1>PRformance</h1>
                 <div className='icons'>
                     <Link to="/"><FaHome size = {25}/></Link>
+                    <Link to='/search'><FaSearch size={25}/></Link>
                     <Link to='/notifications'><span><FaBell size={25}/>{notif.length > 0 && <FaExclamation style = {{color: 'red'}} />}</span></Link>
                     <Link to = '/add'><FaRegPlusSquare size = {25}/></Link>
                     <Link to = '/profile'><img src = {getAuth().currentUser.photoURL} alt = 'profile'/></Link>

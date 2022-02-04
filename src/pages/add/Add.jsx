@@ -12,7 +12,7 @@ const Add = () => {
     const [name, setName] = useState('');
     const [imageAsFile, setImageAsFile] = useState('')
 
-    const [caption, setCaption] = useState('Enter A Caption');
+    const [caption, setCaption] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleFollow = async() => {
@@ -35,7 +35,7 @@ const Add = () => {
             })
 
             batch.commit();
-            setName('Enter A Name')
+            setName('')
             alert("You are now following " + name);
 
         }
@@ -147,7 +147,7 @@ const Add = () => {
                                 {imageAsFile  !== '' && <FaCheck style = {{color: 'green'}} size = {25}/>}
                             </label>
                             <br />
-                            <input type="text" value = {caption} onChange={(e)=>setCaption(e.target.value)}/>
+                            <input type="text" placeholder="Enter a Caption" onChange={(e)=>setCaption(e.target.value)}/>
                             <button onClick={handlePost}>Post</button>
                         </>
                     }
