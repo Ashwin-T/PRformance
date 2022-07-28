@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
   color: white;
-  font-family: 'Fredericka the Great';
+  font-family: 'Roboto', sans-serif;
   font-weight: normal;
 }
 
